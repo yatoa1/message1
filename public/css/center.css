@@ -1,0 +1,153 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; 
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar img {
+    /* margin-left: 1100px; */
+    margin-right: 10px;
+}
+
+.user-greeting {
+    margin-right: 10px;
+}
+
+.main {
+    display: flex;
+    height: calc(100vh - 60px); /* 确保内容区域高度合适 */
+}
+
+.sider {
+    background: #fff;
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 70px 450px 100px;
+}
+
+.container-full {
+    display: flex;
+    justify-content: space-between; /* 确保两侧对齐 */
+}
+
+.sider ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sider ul li {
+    margin: 10px 0;
+}
+
+.sider ul li a {
+    color: #000;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.sider ul li a:hover {
+    color: rgb(142, 139, 139);
+}
+
+.main-content {
+    width: calc(100% - 240px); /* 确保内容区域宽度合适 */
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+#messages-container {
+    margin-bottom: 50px;
+}
+
+.message-form {
+    margin-top: 20px;
+}
+
+.messages ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.messages li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.testlist{
+    background-color:rgb(247, 232, 232);
+    padding: 8px 20px 20px 20px;
+}
+.testlist .lists{
+    background:#fff;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: space-between;
+}
+.testlist .lists .buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* 分页导航容器 */
+.pagination-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80%; /* 确保与留言列表宽度一致 */
+}
+
+/* 分页链接样式 */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 75px;
+    margin-right: 150px;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination a.active {
+    background-color: #ff6b6b;
+    color: white;
+}
