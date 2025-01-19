@@ -42,7 +42,7 @@ class ProfileController extends Controller
             ->take($perPage)
             ->get();
 
-        return view('auth.profile', compact('messages', 'totalPages', 'page'));
+        return view('auth.profile', compact('messages', 'totalPages', 'page', 'editMode', 'message'));
     }
 
     public function store(Request $request)
@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
         try {
 
-            
+
             // 找到要编辑的留言并确保当前用户是留言的所有者
             $message = Message::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 

@@ -16,11 +16,16 @@
                 @auth
                     <!-- 用户头像 -->
                     <div class="user-avatar">
-                        @if (auth()->user()->avatar)
-                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="User Avatar" class="rounded-circle" width="30" height="30">
-                        @else
-                            <img src="{{ asset('images/default-avatar.png') }}" alt="Default Avatar" class="rounded-circle" width="30" height="30">
-                        @endif
+                        @php
+                            $user = Auth::user()->fresh();
+                        @endphp
+                        <img 
+                            src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('img/default.png') }}" 
+                            alt="{{ $user->avatar ? 'User Avatar' : 'Default Avatar' }}" 
+                            class="rounded-circle" 
+                            width="30" 
+                            height="30"
+                        >
                     </div>
                     <!-- 用户名 -->
                     <div class="user-greeting">
@@ -53,34 +58,37 @@
                 <div id="messages-container">
                     @if(isset($editMode) && $editMode)
                     
+                
                     <!-- 编辑留言表单 -->
-                        <form action="{{ route('profile.update', ['id' => $editId]) }}" method="POST">
+                    <form action="{{ route('profile.update', ['id' => $message->id]) }}" method="POST">
                         @csrf
                         @method('PUT')
-                            <p>
-                                <label>编辑留言信息</label><br />
+                        <p>
+                            <label>编辑留言信息</label><br />
                             <textarea 
                                 cols="120" rows="5" name="message" id="message" class="message">{{ old('message', $message->message) }}
                             </textarea>
-                            </p>
-                            <p>
-                                <input name="submit" id="submitted" value="更新" class="submit" type="submit" />
-                            </p>
-                            <input type="hidden" name="edit_mode" value="true">
-                        </form>
-                        @else
-                        <!-- 创建新留言表单 -->
-                        <form action="{{ route('profile.store') }}" method="POST">
-                        @csrf
-                        <p>
-                            <label>留言信息</label><br />
-                            <textarea cols="120" rows="5" name="message" id="message" class="message">{{ old('message') }}</textarea>
                         </p>
                         <p>
-                            <input name="submit" id="submitted" value="提交" class="submit" type="submit" />
+                            <input name="submit" id="submitted" value="更新" class="submit" type="submit" />
                         </p>
                     </form>
-                    @endif
+
+                    @else
+
+                    <!-- 创建新留言表单 -->
+                    <form action="{{ route('profile.store') }}" method="POST">
+                    @csrf
+                    <p>
+                        <label>留言信息</label><br />
+                        <textarea cols="120" rows="5" name="message" id="message" class="message">{{ old('message') }}</textarea>
+                    </p>
+                    <p>
+                        <input name="submit" id="submitted" value="提交" class="submit" type="submit" />
+                    </p>
+                </form>
+
+                @endif
 
                     <div class="message-box">
                         <h3>最新留言</h3>
@@ -106,17 +114,17 @@
                     <div class="pagination-container">
                         <div class="pagination">
                             @if ($page > 1)
-                                <a href="?page={{ $page - 1 }}">上一页</a>
+                                <a href="?page={{ $page - 1 }}" class="page-link">上一页</a>
                             @endif
-
+                        
                             @for ($i = 1; $i <= $totalPages; $i++)
-                                <a href="?page={{ $i }}" {{ ($i == $page) ? 'class="active"' : '' }}>
+                                <a href="?page={{ $i }}" class="page-link {{ ($i == $page) ? 'active' : '' }}">
                                     {{ $i }}
                                 </a>
                             @endfor
-
+                        
                             @if ($page < $totalPages)
-                                <a href="?page={{ $page + 1 }}">下一页</a>
+                                <a href="?page={{ $page + 1 }}" class="page-link">下一页</a>
                             @endif
                         </div>
                     </div>
